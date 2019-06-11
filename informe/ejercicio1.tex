@@ -1,0 +1,49 @@
+\section{Ejercicio 1}
+\subsection{Momentos de la muestra}
+Como sabemos que $X_{1}, ..., X_{n}$ es una muestra aleatoria con distribución $U[0, b]$, sabemos que el primer momento de una distribución uniforme es su esperanza, mientras que su segundo momento su varianza. De esta manera podemos estimar el primer y segundo momento de la muestra:
+
+\begin{align}
+	&m_{1} = E[X] = \frac{a + b}{2} %\\
+    % &m_{2} = V[X] = \frac{a^2 + ab + b^2}{3}
+\end{align}
+
+Sabiendo además que $a = 0$, podemos utilizar la equivalencia $(1)$ para estimar el valor de $b$:
+
+\begin{align*}
+	\bar{X}_{n} &= \frac{1}{n} * \sum_{i=1}^{n}X_{i} \\
+	\iff \bar{X}_{n} &= \frac{1}{n} * n * \frac{a + b}{2} \\
+	\iff \bar{X}_{n} &= \frac{a + b}{2}
+\end{align*}
+
+Luego, despejando $b$ y reemplanzando $a$ por $0$, obtenemos su estimador:
+
+\begin{align*}
+	\hat{b}_{mom} = 2 * \bar{X}_{n}
+\end{align*}
+
+\subsection{Estimador de Máxima Verosimilitud}
+Sabemos que la función de densidad de una distribución uniforme es:
+$$f_{X}(x)=\frac{1}{b - a}I_{(a, b)}(x)$$
+Sabiendo que $a = 0$ y que $a < b$ por propiedades de distribución uniforme, procederemos a maximizar $f_{X}(x)$ para estimar el valor de máxima verosimilitud de $b$:
+
+\begin{align*}
+	L(\theta) &= \prod_{i=1}^{n}\frac{1}{b - a}I_{(a, b)}(x) \\
+	\iff L(\theta) &= \prod_{i=1}^{n}\frac{1}{b - 0}I_{(a, b)}(x) \\
+	\iff L(\theta) &= (\frac{1}{b})^n I_{(a, b)}(x)
+\end{align*}
+
+Por lo tanto:
+
+\begin{center}
+\begin{displaymath}
+L(\theta) = \left\{
+\begin{array}{l l}
+			\frac{1}{b^n} & \text{si }max\{x_{1}, ..., x_{n}\} < \theta\\
+			0 & \text{sino}
+\end{array}
+\right.
+\end{displaymath}
+\end{center}
+
+Esto implica que $\frac{1}{b^n}$ es máximo cuando $b^n$ es mínimo. Luego, el valor más chico posible de $b$ es el valor más grande que haya tomado algún resultado en la muestra $X_{1}, ..., X_{n}$. Porque si $b$ fuese menor a alguno de ellos, la probabilidad total sería nula (por contener un elemento fuera del rango de la distribución). Finalmente, tenemos un valor para nuestro estimador:
+$$\hat{b}_{mv} = max\{x_{1}, ..., x_{n}\}$$
