@@ -153,7 +153,7 @@ def simulacion_med(b, n):
 def ejercicio_6():
 	a = 0.0
 	b = 2.0
-	step = 0.1
+	step = 0.01
 	bs = numpy.arange(start = a + step, stop = b, step = step)
 
 	simulaciones_mv = [simulacion_mv(b = b, n = 15) for b in bs]
@@ -173,14 +173,66 @@ def ejercicio_6():
 	ecms_med = como_lista("ecm", simulaciones_med)
 
 	leyendas = ["Maxima Verosimilitud", "Momento", "Doble Mediana"]
-	plot("Sesgos", bs, [sesgos_mv, sesgos_mom, sesgos_med], leyendas, graficar_grande=True)
-	plot("Varianzas", bs, [varianzas_mv, varianzas_mom, varianzas_med], leyendas, graficar_grande=True)
-	plot("ECM", bs, [ecms_mv, ecms_mom, ecms_med], leyendas, graficar_grande=True)
+
+	plot("Sesgos", bs, [sesgos_mv, sesgos_mom, sesgos_med], 
+		labels=leyendas, graficar_grande=True, output="sesgos.png",
+		save_instead_of_plotting = False)
+
+	plot("Varianzas", bs, [varianzas_mv, varianzas_mom, varianzas_med], 
+		labels=leyendas, graficar_grande=True, output="varianzas.png",
+		save_instead_of_plotting = False)
+
+	plot("ECM", bs, [ecms_mv, ecms_mom, ecms_med], 
+		labels=leyendas, graficar_grande=True, output="ecm.png",
+		save_instead_of_plotting = False)
+
+#################################################################################################
+####################################### Ejercicio 7 #############################################
+#################################################################################################
+
+def plot_varianzas_estimadores(simulaciones_mv, simulaciones_mom, simulaciones_med):
+	var_mv = statistics.mean([simulacion['var_estimador'] for simulacion in simulaciones_mv])
+	var_mom = statistics.mean([simulacion['var_estimador'] for simulacion in simulaciones_mom])
+	var_med = statistics.mean([simulacion['var_estimador'] for simulacion in simulaciones_med])
+
+	plt.axhline(y=var_mv, color='b', linewidth=0.8, linestyle='dotted')
+	plt.axhline(y=var_mom, color='orange', linewidth=0.8, linestyle='dotted')
+	plt.axhline(y=var_med, color='g', linewidth=0.8, linestyle='dotted')
+	plt.plot([], [], color='black', linestyle='dotted', linewidth=0.8, label=r"$V(\hat{\theta})$")
+
+
+def ejercicio_7():
+	ns = [15, 30, 60, 120, 240, 480, 960, 1920]
+
+	simulaciones_mv = [simulacion_mv(b = 1.0, n = n) for n in ns]
+	simulaciones_mom = [simulacion_mom(b = 1.0, n = n) for n in ns]
+	simulaciones_med = [simulacion_med(b = 1.0, n = n) for n in ns]
+
+	ns_mv = como_lista("ecm", simulaciones_mv)
+	ns_mom = como_lista("ecm", simulaciones_mom)
+	ns_med = como_lista("ecm", simulaciones_med)
+
+	leyendas = ["Maxima Verosimilitud", "Momento", "Doble Mediana"]
+
+
+	setup_plot("ECM", ns, [ns_mv, ns_mom, ns_med], 
+		labels=leyendas, graficar_grande = True)
+	plot_varianzas_estimadores(simulaciones_mv, simulaciones_mom, simulaciones_med)
+	show_plot(output="ecm-en-f-de-n.png",
+		save_instead_of_plotting = False)
+
+#################################################################################################
+########################################## MISC #################################################
+#################################################################################################
+
+def plot(titulo_eje_y, xs, yss, labels, graficar_grande, output, save_instead_of_plotting):
+	setup_plot(titulo_eje_y, xs, yss, labels, graficar_grande)
+	show_plot(output, save_instead_of_plotting)
 
 def como_lista(parametro, simulaciones):
 	return [simulacion[parametro] for simulacion in simulaciones]
 
-def plot(titulo_eje_y, xs, yss, labels, graficar_grande):
+def setup_plot(titulo_eje_y, xs, yss, labels, graficar_grande):
 	if graficar_grande:
 		plt.rcParams["figure.figsize"] = (16, 4)
 
@@ -189,25 +241,28 @@ def plot(titulo_eje_y, xs, yss, labels, graficar_grande):
 	plt.ylabel(titulo_eje_y)
 
 	for ys, label in zip(yss, labels):
-		plt.plot(xs, ys, label=label)
+		plt.plot(xs, ys, label=label, linewidth=0.8, marker='.')
 	
 	plt.grid(True)
 	plt.grid(b=True, which='major', color='black', linestyle='dotted', alpha=0.1)
 	plt.grid(b=True, which='minor', color='black', linestyle='dotted', alpha=0.05)
 	plt.minorticks_on()
-	plt.legend()
-	plt.draw()
-	plt.show()
-	# plt.savefig(sys.path[0] + "/informe/imagenes/" + titulo_eje_y.lower() + ".png", dpi=160, bbox_inches='tight')
-	plt.clf()
 
-#################################################################################################
-########################################### MISC ################################################
-#################################################################################################
+def show_plot(output, save_instead_of_plotting):
+	plt.legend()
+
+	if not save_instead_of_plotting:
+		plt.draw()
+		plt.show()
+	else:
+		plt.savefig(sys.path[0] + "/informe/imagenes/" + output, dpi=160, bbox_inches='tight')
+
+	plt.clf()
 
 def ejecutar_ejercicios():
 	ejercicio_3()
 	ejercicio_4()
-	ejercicio_6()
+	# ejercicio_6()
+	ejercicio_7()
 
 ejecutar_ejercicios()
