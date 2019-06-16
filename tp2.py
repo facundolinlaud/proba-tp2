@@ -200,6 +200,8 @@ def plot_varianzas_estimadores(simulaciones_mv, simulaciones_mom, simulaciones_m
 	plt.axhline(y=var_med, color='g', linewidth=0.8, linestyle='dotted')
 	plt.plot([], [], color='black', linestyle='dotted', linewidth=0.8, label=r"$V(\hat{\theta})$")
 
+def plot_x_axis():
+	plt.axhline(0, color='black', linewidth=1)
 
 def ejercicio_7():
 	ns = [15, 30, 60, 120, 240, 480, 960, 1920]
@@ -208,36 +210,43 @@ def ejercicio_7():
 	simulaciones_mom = [simulacion_mom(b = 1.0, n = n) for n in ns]
 	simulaciones_med = [simulacion_med(b = 1.0, n = n) for n in ns]
 
-	ns_mv = como_lista("ecm", simulaciones_mv)
-	ns_mom = como_lista("ecm", simulaciones_mom)
-	ns_med = como_lista("ecm", simulaciones_med)
+	ns_ecm_mv = como_lista("ecm", simulaciones_mv)
+	ns_ecm_mom = como_lista("ecm", simulaciones_mom)
+	ns_ecm_med = como_lista("ecm", simulaciones_med)
 
 	leyendas = ["Maxima Verosimilitud", "Momento", "Doble Mediana"]
 
-
-	setup_plot("ECM", ns, [ns_mv, ns_mom, ns_med], 
-		labels=leyendas, graficar_grande = True)
+	setup_plot("ECM", ns, [ns_ecm_mv, ns_ecm_mom, ns_ecm_med], 
+		labels=leyendas, graficar_grande = False, xlabel="n")
 	plot_varianzas_estimadores(simulaciones_mv, simulaciones_mom, simulaciones_med)
-	show_plot(output="ecm-en-f-de-n.png",
-		save_instead_of_plotting = False)
+	show_plot(output="ecm-en-f-de-n-small.png",
+		save_instead_of_plotting = True)
 
+	ns_sesgos_mv = como_lista("sesgo", simulaciones_mv)
+	ns_sesgos_mom = como_lista("sesgo", simulaciones_mom)
+	ns_sesgos_med = como_lista("sesgo", simulaciones_med)
+
+	setup_plot("Sesgo", ns, [ns_sesgos_mv, ns_sesgos_mom, ns_sesgos_med],
+		labels=leyendas, graficar_grande = False, xlabel="n")
+	plot_x_axis()
+	show_plot(output="sesgos-en-f-de-n-small.png", save_instead_of_plotting = True)
 #################################################################################################
 ########################################## MISC #################################################
 #################################################################################################
 
-def plot(titulo_eje_y, xs, yss, labels, graficar_grande, output, save_instead_of_plotting):
-	setup_plot(titulo_eje_y, xs, yss, labels, graficar_grande)
+def plot(titulo_eje_y, xs, yss, labels, graficar_grande, xlabel, output, save_instead_of_plotting):
+	setup_plot(titulo_eje_y, xs, yss, labels, graficar_grande, xlabel)
 	show_plot(output, save_instead_of_plotting)
 
 def como_lista(parametro, simulaciones):
 	return [simulacion[parametro] for simulacion in simulaciones]
 
-def setup_plot(titulo_eje_y, xs, yss, labels, graficar_grande):
+def setup_plot(titulo_eje_y, xs, yss, labels, graficar_grande, xlabel):
 	if graficar_grande:
 		plt.rcParams["figure.figsize"] = (16, 4)
 
 	plt.tight_layout(pad=0)
-	plt.xlabel("Valores de b")
+	plt.xlabel(xlabel)
 	plt.ylabel(titulo_eje_y)
 
 	for ys, label in zip(yss, labels):
