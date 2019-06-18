@@ -97,16 +97,17 @@ def simular_sesgo_varianza_y_ecm_para_estimador(nombre_estimador, b, muestra):
 	estimador = statistics.mean(muestra)
 
 	# Calculamos el sesgo del estimador restándolo con el valor real de 'b'
-	sesgo = b - estimador
+	sesgo = estimador - b
 
 	# Ahora calculamos la varianza muestral del estimador. La función statistics.variance() es la
 	# varianza muestral que provee Python mientras que statistics.pvariance() es la varianza poblacional.
 	# En este caso, es adecuado utilizar statistics.variance():
 	var_estimador = statistics.variance(muestra, estimador)
+	var_estimador = calcular_varianza_muestral(muestra, estimador)
 
 	# Finalmente, procedemos a calcular el Error Cuadrático Medio del estimador utilizando su varianza
 	# muestral y su respectivo sesgo:
-	ecm = var_estimador + sesgo ** 2
+	ecm = var_estimador + (sesgo ** 2)
 
 	if nombre_estimador != None: # Porque no siempre voy a querer mostrar todo esto por pantalla
 		print(f"	Simulando estimador {nombre_estimador}")
@@ -122,6 +123,14 @@ def simular_sesgo_varianza_y_ecm_para_estimador(nombre_estimador, b, muestra):
 		"var_estimador": var_estimador,
 		"ecm": ecm
 	}
+
+def calcular_varianza_muestral(muestra, esperanza):
+	varianza = 0
+
+	for valor in muestra:
+		varianza += (valor - esperanza)**2
+
+	return varianza / (len(muestra) - 1)
 
 #################################################################################################
 ####################################### Ejercicio 5 #############################################
@@ -153,7 +162,7 @@ def ejercicio_6():
 	a = 0.0
 	b = 2.0
 	step = 0.01
-	bs = numpy.arange(start = a + step, stop = b, step = step)
+	bs = numpy.arange(start = a, stop = b, step = step)
 
 	simulaciones_mv = [simulacion_mv(b = b, n = 15) for b in bs]
 	simulaciones_mom = [simulacion_mom(b = b, n = 15) for b in bs]
@@ -174,16 +183,16 @@ def ejercicio_6():
 	leyendas = ["Maxima Verosimilitud", "Momento", "Doble Mediana"]
 
 	plot("Sesgos", bs, [sesgos_mv, sesgos_mom, sesgos_med], 
-		labels=leyendas, graficar_grande=True, output="sesgos.png",
-		save_instead_of_plotting = False)
+		labels=leyendas, graficar_grande=True, xlabel="b", output="sesgos.png",
+		save_instead_of_plotting = False, marker='')
 
 	plot("Varianzas", bs, [varianzas_mv, varianzas_mom, varianzas_med], 
-		labels=leyendas, graficar_grande=True, output="varianzas.png",
-		save_instead_of_plotting = False)
+		labels=leyendas, graficar_grande=True, xlabel="b", output="varianzas.png",
+		save_instead_of_plotting = False, marker='')
 
 	plot("ECM", bs, [ecms_mv, ecms_mom, ecms_med], 
-		labels=leyendas, graficar_grande=True, output="ecm.png",
-		save_instead_of_plotting = False)
+		labels=leyendas, graficar_grande=True, xlabel="b", output="ecm.png",
+		save_instead_of_plotting = False, marker='')
 
 #################################################################################################
 ####################################### Ejercicio 7 #############################################
@@ -203,12 +212,13 @@ def plot_x_axis():
 	plt.axhline(0, color='black', linewidth=1)
 
 def ejercicio_7():
-	ns = [15, 30, 60, 120, 240, 480, 960, 1920]
+	ns = [15, 30, 60, 120, 240, 480]#, 960, 1920, 2500, 3000, 3500, 4000]
 
 	simulaciones_mv = [simulacion_mv(b = 1.0, n = n) for n in ns]
 	simulaciones_mom = [simulacion_mom(b = 1.0, n = n) for n in ns]
 	simulaciones_med = [simulacion_med(b = 1.0, n = n) for n in ns]
 
+	# ECM en función de n
 	ns_ecm_mv = como_lista("ecm", simulaciones_mv)
 	ns_ecm_mom = como_lista("ecm", simulaciones_mom)
 	ns_ecm_med = como_lista("ecm", simulaciones_med)
@@ -216,26 +226,37 @@ def ejercicio_7():
 	leyendas = ["Maxima Verosimilitud", "Momento", "Doble Mediana"]
 
 	setup_plot("ECM", ns, [ns_ecm_mv, ns_ecm_mom, ns_ecm_med], 
-		labels=leyendas, graficar_grande = False, xlabel="n")
+		labels=leyendas, graficar_grande = True, xlabel="n", marker='.')
+	plot_x_axis()
 	plot_varianzas_estimadores(simulaciones_mv, simulaciones_mom, simulaciones_med)
-	show_plot(output="ecm-en-f-de-n-small.png",
-		save_instead_of_plotting = True)
+	show_plot(output="ecm-en-f-de-n.png",
+		save_instead_of_plotting = False)
 
+	# Sesgos en función de n
 	ns_sesgos_mv = como_lista("sesgo", simulaciones_mv)
 	ns_sesgos_mom = como_lista("sesgo", simulaciones_mom)
 	ns_sesgos_med = como_lista("sesgo", simulaciones_med)
 
 	setup_plot("Sesgo", ns, [ns_sesgos_mv, ns_sesgos_mom, ns_sesgos_med],
-		labels=leyendas, graficar_grande = False, xlabel="n")
+		labels=leyendas, graficar_grande = True, xlabel="n", marker='.')
 	plot_x_axis()
-	show_plot(output="sesgos-en-f-de-n-small.png", save_instead_of_plotting = True)
+	show_plot(output="sesgos-en-f-de-n.png", save_instead_of_plotting = False)
+
+	# Varianza en función de n
+	ns_var_mv = como_lista("var_estimador", simulaciones_mv)
+	ns_var_mom = como_lista("var_estimador", simulaciones_mom)
+	ns_var_med = como_lista("var_estimador", simulaciones_med)
+
+	setup_plot("Varianza", ns, [ns_var_mv, ns_var_mom, ns_var_med],
+		labels=leyendas, graficar_grande = False, xlabel="n", marker='.')
+	plot_x_axis()
+	show_plot(output="varianzas-en-f-de-n-small.png", save_instead_of_plotting = False)
 
 #################################################################################################
 ####################################### Ejercicio 8 #############################################
 #################################################################################################
 
 def ejercicio_8:
-
 	# Tomamos la muestra dada por la catedra.
 	muestra = [0.917 0.247 0.384 0.530 0.798 0.912 0.096 0.684 0.394 20.1 0.769 0.137 0.352 0.332 0.670]
 
@@ -247,23 +268,25 @@ def ejercicio_8:
 ########################################## MISC #################################################
 #################################################################################################
 
-def plot(titulo_eje_y, xs, yss, labels, graficar_grande, xlabel, output, save_instead_of_plotting):
-	setup_plot(titulo_eje_y, xs, yss, labels, graficar_grande, xlabel)
+def plot(titulo_eje_y, xs, yss, labels, graficar_grande, xlabel, output, save_instead_of_plotting, marker):
+	setup_plot(titulo_eje_y, xs, yss, labels, graficar_grande, xlabel, marker)
 	show_plot(output, save_instead_of_plotting)
 
 def como_lista(parametro, simulaciones):
 	return [simulacion[parametro] for simulacion in simulaciones]
 
-def setup_plot(titulo_eje_y, xs, yss, labels, graficar_grande, xlabel):
+def setup_plot(titulo_eje_y, xs, yss, labels, graficar_grande, xlabel, marker):
 	if graficar_grande:
 		plt.rcParams["figure.figsize"] = (16, 4)
+	else:
+		plt.rcParams["figure.figsize"] = (8, 6)
 
 	plt.tight_layout(pad=0)
 	plt.xlabel(xlabel)
 	plt.ylabel(titulo_eje_y)
 
 	for ys, label in zip(yss, labels):
-		plt.plot(xs, ys, label=label, linewidth=0.8, marker='.')
+		plt.plot(xs, ys, label=label, linewidth=0.8, marker=marker)
 	
 	plt.grid(True)
 	plt.grid(b=True, which='major', color='black', linestyle='dotted', alpha=0.1)
@@ -282,8 +305,8 @@ def show_plot(output, save_instead_of_plotting):
 	plt.clf()
 
 def ejecutar_ejercicios():
-	ejercicio_3()
-	ejercicio_4()
+	# ejercicio_3()
+	# ejercicio_4()
 	# ejercicio_6()
 	ejercicio_7()
 
