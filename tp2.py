@@ -133,7 +133,6 @@ def simulacion_mv(b, n):
 
 	return simular_sesgo_varianza_y_ecm_para_estimador(None, b, muestra_estimadores)
 
-
 def simulacion_mom(b, n):
 	muestra_estimadores = [estimar_b_por_momentos(a = 0,
 		muestra = obtener_muestra_uniforme(a = 0, b = b, cantidad = 15)) for _ in range(n)]
@@ -230,6 +229,20 @@ def ejercicio_7():
 		labels=leyendas, graficar_grande = False, xlabel="n")
 	plot_x_axis()
 	show_plot(output="sesgos-en-f-de-n-small.png", save_instead_of_plotting = True)
+
+#################################################################################################
+####################################### Ejercicio 8 #############################################
+#################################################################################################
+
+def ejercicio_8:
+
+	# Tomamos la muestra dada por la catedra.
+	muestra = [0.917 0.247 0.384 0.530 0.798 0.912 0.096 0.684 0.394 20.1 0.769 0.137 0.352 0.332 0.670]
+
+	b_mom = estimar_b_por_momentos(0, muestra)
+	b_med = estimar_b_por_doble_mediana(muestra)
+	b_mv = estimar_b_por_maxima_verosimilitud(muestra)
+
 #################################################################################################
 ########################################## MISC #################################################
 #################################################################################################
