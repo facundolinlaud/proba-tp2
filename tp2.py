@@ -101,8 +101,10 @@ def simular_sesgo_varianza_y_ecm_para_estimador(nombre_estimador, b, muestra):
 
 	# Ahora calculamos la varianza muestral del estimador. La función statistics.variance() es la
 	# varianza muestral que provee Python mientras que statistics.pvariance() es la varianza poblacional.
-	# En este caso, es adecuado utilizar statistics.variance():
-	var_estimador = statistics.variance(muestra, estimador)
+	# En este caso, es adecuado utilizar statistics.variance(). Utilizaremos nuestra propia implementacion
+	# de todas maneras.
+	# var_estimador = statistics.variance(muestra, estimador)
+
 	var_estimador = calcular_varianza_muestral(muestra, estimador)
 
 	# Finalmente, procedemos a calcular el Error Cuadrático Medio del estimador utilizando su varianza
@@ -127,9 +129,11 @@ def simular_sesgo_varianza_y_ecm_para_estimador(nombre_estimador, b, muestra):
 def calcular_varianza_muestral(muestra, esperanza):
 	varianza = 0
 
+	# Sumo a la varianza el cuadrado de cada valor en la muestra menos el promedio de la muestra
 	for valor in muestra:
 		varianza += (valor - esperanza)**2
 
+	# Luego retorno la sumatoria dividida por n - 1
 	return varianza / (len(muestra) - 1)
 
 #################################################################################################
