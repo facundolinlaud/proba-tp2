@@ -273,7 +273,7 @@ def ejercicio_8():
 	print(f"Estimador por doble mediana: {b_med}")
 
 #################################################################################################
-####################################### Ejercicio 8 #############################################
+####################################### Ejercicio 9 #############################################
 #################################################################################################
 
 def ejercicio_9():
@@ -355,10 +355,10 @@ def show_plot(output, save_instead_of_plotting):
 	plt.clf()
 
 def ejecutar_ejercicios():
-	# ejercicio_3()
-	# ejercicio_4()
-	# ejercicio_6()
-	# ejercicio_7()
+	ejercicio_3()
+	ejercicio_4()
+	ejercicio_6()
+	ejercicio_7()
 	ejercicio_8()
 	ejercicio_9()
 
