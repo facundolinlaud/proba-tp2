@@ -262,11 +262,30 @@ def ejercicio_7():
 
 def ejercicio_8:
 	# Tomamos la muestra dada por la catedra.
-	muestra = [0.917 0.247 0.384 0.530 0.798 0.912 0.096 0.684 0.394 20.1 0.769 0.137 0.352 0.332 0.670]
+	muestra = [0.917, 0.247, 0.384, 0.530, 0.798, 0.912, 0.096, 0.684, 0.394, 20.1, 0.769, 0.137, 0.352, 0.332, 0.670]
 
 	b_mom = estimar_b_por_momentos(0, muestra)
 	b_med = estimar_b_por_doble_mediana(muestra)
 	b_mv = estimar_b_por_maxima_verosimilitud(muestra)
+
+#################################################################################################
+####################################### Ejercicio 8 #############################################
+#################################################################################################
+
+def ejercicio_9:
+	#tomamos una muestra aleatoria X_1, X_2, ..., X_15, con X_i ~ U[0, 1].
+	m = obtener_muestra_uniforme(0, 1, 15)
+
+	#De forma independiente, tenemos que cada elemento se multiplica por 100 con proba 0.005.
+	#Entonces, hacemos 15 muestras Bernoulli.
+	m_bernoulli = numpy.random.binomial(1, 0.005, 15)
+
+	#Tomamos entonces tomamos la muestra uniforme y la modificamos segun la muestra Bernoulli
+	for i in range(15):
+		if m_bernoulli[i] == 1:
+			m[i] *= 100
+
+	# TO DO: Me estaria faltando la parte de reportar las aproximaciones, que no se como hacerlo
 
 #################################################################################################
 ########################################## MISC #################################################

@@ -1,0 +1,16 @@
+\section{Ejercicio 9}
+
+Nos piden analizar aproximar sesgo, varianza y error cuadrático medio para los estimadores de una muestra aleatoria con b = 1 y n = 15 donde de manera independiente, a cada elemento se lo multiplica por 100 con probablidad 0,005. (Correr la coma dos lugares a la derecha).
+
+Esto nos dice que tenemos entonces, para cada valor, una variable aleatoria Bernoulli con $p = 1$. Al hacerlo para cada valor de nuestra muestra uniforme, podemos decir que tenemos una v.a. \textit{X = numero de valores contaminados en n repeticiones} con distribucion Binomial(n, p). Damos a continaci\'on, su funci\'on de probabilidad puntual:
+
+\begin{center}[H]
+	$p_X(k) = \binom{n}{k}p^k(1-p)^{n-p}$
+\end{center}
+
+Con esto podemos saber la probabilidad de una muestra est\'e contaminada:
+
+\begin{center}[H]
+	$P(1 \leqslant X) = 1 - P(X = 0) = 0.07243103119$
+\end{center}
+
