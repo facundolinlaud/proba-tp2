@@ -269,6 +269,52 @@ def ejercicio_8():
 	b_med = estimar_b_por_doble_mediana(muestra)
 	b_mv = estimar_b_por_maxima_verosimilitud(muestra)
 
+	print(f"Estimador por momentos: {b_mom}")
+	print(f"Estimador por maxima verosimilitud: {b_mv}")
+	print(f"Estimador por doble mediana: {b_med}")
+
+#################################################################################################
+####################################### Ejercicio 9 #############################################
+#################################################################################################
+
+def ejercicio_9():
+
+	a = 0
+	b = 1
+	Nrep = 1000
+
+	muestra_b_moms = []
+	muestra_b_mvs = []
+	muestra_b_meds = []
+
+	for _ in range(Nrep): 
+		#tomamos una muestra aleatoria X_1, X_2, ..., X_15, con X_i ~ U[0, 1].
+		m = obtener_muestra_uniforme(0, 1, 15)
+
+		#De forma independiente, tenemos que cada elemento se multiplica por 100 con proba 0.005.
+		#Entonces, hacemos 15 muestras Bernoulli.
+		m_bernoulli = numpy.random.binomial(1, 0.005, 15)
+
+		#Tomamos entonces tomamos la muestra uniforme y la modificamos segun la muestra Bernoulli
+		for i in range(15):
+			if m_bernoulli[i] == 1:
+				m[i] *= 100
+
+		# TO DO: Me estaria faltando la parte de reportar las aproximaciones, que no se como hacerlo
+
+		b_mom = estimar_b_por_momentos(0, m)
+		b_mv = estimar_b_por_maxima_verosimilitud(m)
+		b_med = estimar_b_por_doble_mediana(m)
+
+		muestra_b_moms.append(b_mom)
+		muestra_b_mvs.append(b_mv)
+		muestra_b_meds.append(b_med)
+
+	simular_sesgo_varianza_y_ecm_para_estimador("Momentos", b = b, muestra = muestra_b_moms)
+	simular_sesgo_varianza_y_ecm_para_estimador("Máxima Verosimilitud", b = b, muestra = muestra_b_mvs)
+	simular_sesgo_varianza_y_ecm_para_estimador("Doble Mediana", b = b, muestra = muestra_b_meds)
+
+
 #################################################################################################
 ########################################## MISC #################################################
 #################################################################################################
@@ -310,9 +356,11 @@ def show_plot(output, save_instead_of_plotting):
 	plt.clf()
 
 def ejecutar_ejercicios():
-	# ejercicio_3()
-	# ejercicio_4()
-	# ejercicio_6()
+	ejercicio_3()
+	ejercicio_4()
+	ejercicio_6()
 	ejercicio_7()
+	ejercicio_8()
+	ejercicio_9()
 
 ejecutar_ejercicios()
