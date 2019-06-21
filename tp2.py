@@ -52,9 +52,6 @@ def ejercicio_3():
 	b_med = estimar_b_por_doble_mediana(muestra)
 
 	# Obtenemos el error restando los estimadores al valor verdadero de 'b' que es 2.
-	# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-	# !!!!!!! TO DO: CHECKEAR SI ESTO ESTA BIEN !!!!!!!!!!!!!!!
-	# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	print(f"  Con la muestra: {muestra}")
 	print(f"  b_mom = {b_mom} y su error es {b - b_mom}")
 	print(f"  b_mv = {b_mv} y su error es {b - b_mv}")
@@ -64,9 +61,6 @@ def ejercicio_3():
 ####################################### Ejercicio 4 #############################################
 #################################################################################################
 
-# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-# !!!!!!! TO DO: HAY QUE JUSTIFICAR EN LATEX ESTE EJERCICIO? !!!!!!!!!!!
-# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 def ejercicio_4():
 	print("Ejercicio 4")
 	# El enunciado nos propone utilizar [a, b) = [0, 1)
@@ -300,8 +294,6 @@ def ejercicio_9():
 		for i in range(15):
 			if m_bernoulli[i] == 1:
 				m[i] *= 100
-
-		# TO DO: Me estaria faltando la parte de reportar las aproximaciones, que no se como hacerlo
 
 		b_mom = estimar_b_por_momentos(0, m)
 		b_mv = estimar_b_por_maxima_verosimilitud(m)
