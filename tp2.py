@@ -96,6 +96,7 @@ def simular_sesgo_varianza_y_ecm_para_estimador(nombre_estimador, b, muestra):
 	# Calculamos el promedio del estimador invocando la función statistics.mean sobre la muestra
 	estimador = statistics.mean(muestra)
 
+
 	# Calculamos el sesgo del estimador restándolo con el valor real de 'b'
 	sesgo = estimador - b
 
@@ -260,9 +261,9 @@ def ejercicio_7():
 ####################################### Ejercicio 8 #############################################
 #################################################################################################
 
-def ejercicio_8:
+def ejercicio_8():
 	# Tomamos la muestra dada por la catedra.
-	muestra = [0.917 0.247 0.384 0.530 0.798 0.912 0.096 0.684 0.394 20.1 0.769 0.137 0.352 0.332 0.670]
+	muestra = [0.917, 0.247, 0.384, 0.530, 0.798, 0.912, 0.096, 0.684, 0.394, 20.1, 0.769, 0.137, 0.352, 0.332, 0.670]
 
 	b_mom = estimar_b_por_momentos(0, muestra)
 	b_med = estimar_b_por_doble_mediana(muestra)
