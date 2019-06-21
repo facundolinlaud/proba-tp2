@@ -269,9 +269,10 @@ def ejercicio_8():
 	b_med = estimar_b_por_doble_mediana(muestra)
 	b_mv = estimar_b_por_maxima_verosimilitud(muestra)
 
-	print(f"Estimador por momentos: {b_mom}")
-	print(f"Estimador por maxima verosimilitud: {b_mv}")
-	print(f"Estimador por doble mediana: {b_med}")
+	print(f"Ejercicio 8")
+	print(f"	Estimador por momentos: {b_mom}")
+	print(f"	Estimador por maxima verosimilitud: {b_mv}")
+	print(f"	Estimador por doble mediana: {b_med}")
 
 #################################################################################################
 ####################################### Ejercicio 9 #############################################
@@ -310,6 +311,7 @@ def ejercicio_9():
 		muestra_b_mvs.append(b_mv)
 		muestra_b_meds.append(b_med)
 
+	print(f"Ejercicio 9")
 	simular_sesgo_varianza_y_ecm_para_estimador("Momentos", b = b, muestra = muestra_b_moms)
 	simular_sesgo_varianza_y_ecm_para_estimador("Máxima Verosimilitud", b = b, muestra = muestra_b_mvs)
 	simular_sesgo_varianza_y_ecm_para_estimador("Doble Mediana", b = b, muestra = muestra_b_meds)
