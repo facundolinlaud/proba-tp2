@@ -1,24 +1,24 @@
-\section{Ejercicio 1}
-\subsection{Momentos de la muestra}
-Como sabemos que $X_{1}, \dots, X_{n}$ es una muestra aleatoria con distribución $U[0, b]$, sabemos que el primer momento de una distribución uniforme es su esperanza, mientras que su segundo momento su varianza. De esta manera podemos estimar el primer y segundo momento de la muestra:
-
-\begin{align}
-	&m_{1} = E[X] = \frac{a + b}{2} %\\
-    % &m_{2} = V[X] = \frac{a^2 + ab + b^2}{3}
-\end{align}
-
-Sabiendo además que $a = 0$, podemos utilizar la equivalencia $(1)$ para estimar el valor de $b$:
+\section{Estimaciones del parámetro b}
+\subsection{Método de momentos}
+Planteemos el momento muestral de primer orden:
 
 \begin{align*}
-	\bar{X}_{n} &= \frac{1}{n} * \sum_{i=1}^{n}X_{i} \\
-	\iff \bar{X}_{n} &= \frac{1}{n} * n * \frac{a + b}{2} \\
-	\iff \bar{X}_{n} &= \frac{a + b}{2}
+	&E(X) = \frac{\sum_{i=1}^{n}X_{i}}{n} \\
 \end{align*}
 
-Luego, despejando $b$ y reemplanzando $a$ por $0$, obtenemos su estimador:
+Como $X_{1}, \dots, X_{n}$ es una muestra aleatoria de una distribución $U[0, b]$, podemos igualar el primer momento muestral a la esperanza de la distribución con parámetros $0$ y $b$:
 
 \begin{align*}
-	\hat{b}_{mom} = 2 * \bar{X}_{n}
+	\frac{\sum_{i=1}^{n}X_{i}}{n} = E(X) &\implies \\
+	\frac{\sum_{i=1}^{n}X_{i}}{n} = \frac{b}{2} &\implies \\
+	\bar{X} = \frac{b}{2} &\implies \\
+	2 \cdot \bar{X} = b&
+\end{align*}
+
+De esta manera, obtenemos la expresión del estimador del parámetro $b$:
+
+\begin{align*}
+	\hat{b}_{mom} = 2 \bar{X}_{n}
 \end{align*}
 
 \subsection{Estimador de Máxima Verosimilitud}
@@ -27,19 +27,18 @@ $$f_{X}(x)=\frac{1}{b - a}I_{(a, b)}(x)$$
 Sabiendo que $a = 0$ y que $a < b$ por propiedades de distribución uniforme, procederemos a maximizar $f_{X}(x)$ para estimar el valor de máxima verosimilitud de $b$:
 
 \begin{align*}
-	L(\theta) &= \prod_{i=1}^{n}\frac{1}{b - a}I_{(a, b)}(x) \\
-	\iff L(\theta) &= \prod_{i=1}^{n}\frac{1}{b - 0}I_{(a, b)}(x) \\
-	\iff L(\theta) &= \prod_{i=1}^{n}\frac{1}{b}I_{(x_{i}, +\infty)}(\theta)
-	% \iff L(\theta) &= (\frac{1}{b})^n I_{(x_{i}, \infty)}(\theta)
+	L(b) &= \prod_{i=1}^{n}\frac{1}{b - a}I_{(a, b)}(x) \\
+	\iff L(b) &= \prod_{i=1}^{n}\frac{1}{b - 0}I_{(a, b)}(x) \\
+	\iff L(b) &= \prod_{i=1}^{n}\frac{1}{b}I_{(x_{i}, +\infty)}(b)
 \end{align*}
 
 Por lo tanto:
 
 \begin{center}
 \begin{displaymath}
-L(\theta) = \left\{
+L(b) = \left\{
 \begin{array}{l l}
-			\frac{1}{b^n} & \text{si }max\{x_{1}, \dots, x_{n}\} < \theta\\
+			\frac{1}{b^n} & \text{si }max\{x_{1}, \dots, x_{n}\} < b\\
 			0 & \text{sino}
 \end{array}
 \right.

@@ -1,2 +1,12 @@
-\section{Ejercicio 3}
-El procedimiento para resolver este ejercicio fue obtener el estimador $\hat{\theta}_{mv}$ y restarlo por $b=1$ para obtener el error de máxima verosimilitud. El mismo procedimiento fue realizado análogamente para el estimador de momento $\hat{\theta}_{mom}$. Al ejecutar \textbf{tp2.py}, se puede observar que módulo del error tiende a ser menor o igual a $0.1$.
+\section{Valores y errores de los estimadores para muestra de tamaño 15}
+Con una muestra aleatoria de tamaño 15 de una distrubición uniforme con parámetros $[0, 2]$, calculamos los estimadores correspondientes y sus errores. Este último paso es realizado restando el estimador por el valor real del parámetro que el estimador intenta justamente aproximar. Los resultados son:
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{lccc}
+		\textbf{Estimador} 	&	Valor 		& Error 	\\
+		$\hat{b}_{mv}$  	&	0.838 		& $0.161$ 	\\
+		$\hat{b}_{mom}$     &	0.920 		& $0.079$ 	\\
+		$\hat{b}_{med}$  	&	1.135 		& $-0.135$
+	\end{tabular}
+\end{table}

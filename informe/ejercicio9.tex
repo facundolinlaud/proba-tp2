@@ -1,30 +1,43 @@
-\section{Ejercicio 9}
+\section{Muestra contaminada}
+Nos piden analizar aproximar sesgo, varianza y error cuadrático medio para los estimadores de una muestra aleatoria con $b = 1$ y $n = 15$ donde, de manera independiente, un elemento tiene probabilidad $0,005$ de ser \textit{contaminado} (multiplicado por $100$).
 
-Nos piden analizar aproximar sesgo, varianza y error cuadrático medio para los estimadores de una muestra aleatoria con b = 1 y n = 15 donde de manera independiente, a cada elemento se lo multiplica por 100 con probablidad 0,005. (Correr la coma dos lugares a la derecha).
+\vskip 8pt
 
-Esto nos dice que tenemos entonces, para cada valor, una variable aleatoria Bernoulli con $p = 1$. Al hacerlo para cada valor de nuestra muestra uniforme, podemos decir que tenemos una v.a. \textit{X = numero de valores contaminados en n repeticiones} con distribucion Binomial(n, p). Damos a continaci\'on, su funci\'on de probabilidad puntual:
+Esto nos dice que tenemos, para cada valor $x_{i}$, una variable aleatoria $b_{i}$ de distribución Bernoulli con parámetro $p = 0,005$. Como tenemos $n$ valores en nuestra muestra, tenemos $n$ Bernoullis. Luego, definimos la cantidad de valores contaminados en $X_{n}$ como $Y = \sum_{i=1}^{n}b_{i} \sim Bi(n, p = 0,005)$ porque es una sumatoria de variables aleatorias de Bernoulli, y sabemos su función de densidad:
 
-\begin{center}[H]
-	$p_X(k) = \binom{n}{k}p^k(1-p)^{n-p}$
+\begin{center}
+	$p_Y(k) = \binom{n}{k}p^k(1-p)^{n-p}$
 \end{center}
 
-Con esto podemos saber la probabilidad de una muestra est\'e contaminada:
+De esta manera, obtenemos la probabilidad de una muestra $X_1, \dots, X_{15}$ esté contaminada:
+\begin{align*}
+	P(Y \geq 1) &= 1 - P(Y < 1) \\
+				&= 1 - P(Y = 0) \\
+				&= 0.07243103119
+\end{align*}
 
-\begin{center}[H]
-	$P(1 \leqslant X) = 1 - P(X = 0) = 0.07243103119$
-\end{center}
-
-Para aproximar el sesgo, la varianza y el error cuadr\'atico medio de cada estimador, procederemos (como en el ejercicio 4) a hacer 1000 repeticiones en las que calculamos los estimadores (momentos, doble mediana y m\'axima verosimilitud). A continuaci\'on mostramos los resultados obtenidos.
+Para aproximar el sesgo, la varianza y el error cuadrático medio de cada estimador, procederemos (como en el ejercicio 4) a hacer $1000$ repeticiones en las que calculamos los estimadores (momentos, doble mediana y máxima verosimilitud). A continuación mostramos los resultados obtenidos:
 
 \begin{table}[H]
 	\centering
-	\begin{tabular}{lccc}
-		\textbf{Estimador} & $\hat{\theta}_{mv}$ & $\hat{\theta}_{mom}$ & $\hat{\theta}_{med}$ \\
-		Promedio  & $4.309143770088162$ 			& $1.4625167466253193$ 		& $1.0052100231711671$ \\
-		Sesgo     & $3.309143770088162$ 			& $0.4625167466253193$ 		& $0.005210023171167144$ \\
-		Varianza  & $206.11915535591314$ 			& $3.9386781273955753$ 		& $0.060947650789632726$ \\
-		ECM       & $217.06958784702644$ 			& $4.152599868304445$ 		& $0.06097479513107683$
+	\begin{tabular}{lcccc}
+		\textbf{Estimador} 	& \textbf{Promedio} & \textbf{Sesgo} & \textbf{Varianza} & \textbf{ECM} \\
+		$\hat{b}_{mv}$		& $4.309$			& $3.309$		 & $206.119$		 & $217.069$	\\
+		$\hat{b}_{mom}$ 	& $1.462$ 			& $0.462$ 		 & $3.938$ 			 & $4.152$		\\
+		$\hat{b}_{med}$ 	& $1.005$ 			& $0.005$ 		 & $0.060$ 			 & $0.060$
 	\end{tabular}
 \end{table}
 
-Con estos valores, preferimos el estimador de momentos ya que tiene un el sesgo y el error cuadratico medio mas chico con respecto a diferencia de los demas, en los que vemos que hay un sesgo considerable con respecto al valor real de $b$.
+Si bien $\hat{b}_{med}$ es el único estimador consistente, ante la presencia de elementos contaminados, a menos que la contaminación se produzca en el o los elementos medianos (aquellos utilizados para calcular la mediana), no aportará un parámetro $b$ válido que sea compatible con la muestra en cuestión, pues es altamente probable que la muestra contenga al menos un elemento contaminado que resultará mayor al valor de $b$ estimado por el método de la doble mediana.
+
+\vskip 8pt
+
+Por otro lado, el estimador de momentos diluirá la gravedad ejercida por los elementos contaminados (que en probabilidad son pocos) con los valores no contaminados (que serán la gran mayoría). Por el mismo principio que en el estimador de la doble mediana, si hay un elemento contaminado en la muestra, será altamente probable que se produzca una estimación de $b$ menor a alguno de los elementos contaminados y por ende resulte incompatible la estimación del parámetro con la muestra.
+
+\vskip 8pt
+
+Sin embargo, el estimador de máxima verosimilitud se adaptará a cualquier aparición de elementos contaminados. Es decir, el parámetro estimado será siempre el más grande en la muestra, por lo tanto cualquiera estimación de $b$ será compatible con los elementos de la muestra. El problema es que, a diferencia de $\hat{b}_{med}$, este estimador no es consistente.
+
+\subsection{Conclusiones}
+
+Para este caso, con qué estimador quedarse depende de varias cosas. ¿Una muestra contaminada sigue siendo importante o debería ser deshechada? Si la respuesta es que es importante: ¿Qué tanto queremos arriesgarnos a producir un estimador incompatible con la muestra? y ¿Cuánto nos preocupa que nuestra estimación sea consistente? En nuestra opinión, un estimador siempre debería dar una estimación compatible con la muestra, por lo tanto y sin saber más sobre las aristas del problema, optamos por el estimador de máxima verosimilitud.

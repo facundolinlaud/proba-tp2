@@ -118,7 +118,8 @@ def simular_sesgo_varianza_y_ecm_para_estimador(nombre_estimador, b, muestra):
 		"estimador": estimador,
 		"sesgo": sesgo,
 		"var_estimador": var_estimador,
-		"ecm": ecm
+		"ecm": ecm,
+		"b": b
 	}
 
 def calcular_varianza_muestral(muestra, esperanza):
@@ -161,26 +162,49 @@ def ejercicio_6():
 	a = 0.0
 	b = 2.0
 	step = 0.01
-	bs = numpy.arange(start = a, stop = b, step = step)
+	bs = numpy.arange(start = a + step, stop = b, step = step)
 
 	simulaciones_mv = [simulacion_mv(b = b, n = 15) for b in bs]
 	simulaciones_mom = [simulacion_mom(b = b, n = 15) for b in bs]
 	simulaciones_med = [simulacion_med(b = b, n = 15) for b in bs]
 
+	# pdb.set_trace()
 	sesgos_mv = como_lista("sesgo", simulaciones_mv)
+	sesgos_mv_porcentaje_err = [sesgos_mv[i] * 100 / bs[i] for i in range(len(simulaciones_mv))]
 	varianzas_mv = como_lista("var_estimador", simulaciones_mv)
 	ecms_mv = como_lista("ecm", simulaciones_mv)
 
 	sesgos_mom = como_lista("sesgo", simulaciones_mom)
+	sesgos_mom_porcentaje_err = [sesgos_mom[i] * 100 / bs[i] for i in range(len(simulaciones_mom))]
 	varianzas_mom = como_lista("var_estimador", simulaciones_mom)
 	ecms_mom = como_lista("ecm", simulaciones_mom)
 
 	sesgos_med = como_lista("sesgo", simulaciones_med)
+	sesgos_med_porcentaje_err = [sesgos_med[i] * 100 / bs[i] for i in range(len(simulaciones_med))]
 	varianzas_med = como_lista("var_estimador", simulaciones_med)
 	ecms_med = como_lista("ecm", simulaciones_med)
 
 	leyendas = ["Maxima Verosimilitud", "Momento", "Doble Mediana"]
 
+
+	# Agregados
+	setup_plot("Sesgos (\% de diferencia con b)", bs, [sesgos_mv_porcentaje_err], 
+		labels=[leyendas[0]], graficar_grande=(6, 6), xlabel="b", marker='')
+	plt.ylim((-20,20))
+	show_plot(output="sesgos-mv-porcentaje-err.png", save_instead_of_plotting = False)
+
+	setup_plot("Sesgos (\% de diferencia con b)", bs, [sesgos_mom_porcentaje_err], 
+		labels=[leyendas[1]], graficar_grande=(6, 6), xlabel="b", marker='')
+	plt.ylim((-20,20))
+	show_plot(output="sesgos-mom-porcentaje-err.png", save_instead_of_plotting = False)
+
+	setup_plot("Sesgos (\% de diferencia con b)", bs, [sesgos_med_porcentaje_err], 
+		labels=[leyendas[2]], graficar_grande=(6, 6), xlabel="b", marker='')
+	plt.ylim((-20,20))
+	show_plot(output="sesgos-med-porcentaje-err.png", save_instead_of_plotting = False)
+
+
+	# Defaults
 	plot("Sesgos", bs, [sesgos_mv, sesgos_mom, sesgos_med], 
 		labels=leyendas, graficar_grande=True, xlabel="b", output="sesgos.png",
 		save_instead_of_plotting = False, marker='')
@@ -225,7 +249,7 @@ def ejercicio_7():
 	leyendas = ["Maxima Verosimilitud", "Momento", "Doble Mediana"]
 
 	setup_plot("ECM", ns, [ns_ecm_mv, ns_ecm_mom, ns_ecm_med], 
-		labels=leyendas, graficar_grande = True, xlabel="n", marker='.')
+		labels=leyendas, graficar_grande = False, xlabel="n", marker='.')
 	plot_x_axis()
 	plot_varianzas_estimadores(simulaciones_mv, simulaciones_mom, simulaciones_med)
 	show_plot(output="ecm-en-f-de-n.png",
@@ -237,7 +261,7 @@ def ejercicio_7():
 	ns_sesgos_med = como_lista("sesgo", simulaciones_med)
 
 	setup_plot("Sesgo", ns, [ns_sesgos_mv, ns_sesgos_mom, ns_sesgos_med],
-		labels=leyendas, graficar_grande = True, xlabel="n", marker='.')
+		labels=leyendas, graficar_grande = False, xlabel="n", marker='.')
 	plot_x_axis()
 	show_plot(output="sesgos-en-f-de-n.png", save_instead_of_plotting = False)
 
@@ -273,7 +297,6 @@ def ejercicio_8():
 #################################################################################################
 
 def ejercicio_9():
-
 	a = 0
 	b = 1
 	Nrep = 1000
@@ -320,11 +343,15 @@ def plot(titulo_eje_y, xs, yss, labels, graficar_grande, xlabel, output, save_in
 def como_lista(parametro, simulaciones):
 	return [simulacion[parametro] for simulacion in simulaciones]
 
-def setup_plot(titulo_eje_y, xs, yss, labels, graficar_grande, xlabel, marker):
-	if graficar_grande:
-		plt.rcParams["figure.figsize"] = (16, 4)
+def setup_plot(titulo_eje_y, xs, yss, labels, graficar_grande, xlabel, marker):	
+	if graficar_grande == True:
+		# plt.rcParams["figure.figsize"] = (16, 4)
+		plt.figure(figsize=(16, 4)) 
+	elif graficar_grande == False:
+		# plt.rcParams["figure.figsize"] = (8, 6)
+		plt.figure(figsize=(8, 6)) 
 	else:
-		plt.rcParams["figure.figsize"] = (8, 6)
+		plt.figure(figsize=graficar_grande) 
 
 	plt.tight_layout(pad=0)
 	plt.xlabel(xlabel)
@@ -342,12 +369,9 @@ def show_plot(output, save_instead_of_plotting):
 	plt.legend()
 
 	if not save_instead_of_plotting:
-		plt.draw()
 		plt.show()
 	else:
 		plt.savefig(sys.path[0] + "/informe/imagenes/" + output, dpi=160, bbox_inches='tight')
-
-	plt.clf()
 
 def ejecutar_ejercicios():
 	ejercicio_3()

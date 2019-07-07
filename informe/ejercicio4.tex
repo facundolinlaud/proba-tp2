@@ -1,0 +1,24 @@
+\section{Simulación de mil muestras de tamaño 15}
+A continuación se exhiben los valores promedio de los estimadores con sus sesgos, sus varianzas y sus errores cuadráticos medios para una simulación de mil muestras de tamaño 15:
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{lcccc}
+		\textbf{Estimador} 	& \textbf{Promedio}	& \textbf{Sesgo}	& \textbf{Varianza} & \textbf{ECM}	\\
+		$\hat{b}_{mv}$		& $0.938$			& $-0.064$			& $0.003$			& $0.007$		\\
+		$\hat{b}_{mom}$		& $0.998$			& $-0.001$			& $0.022$			& $0.022$		\\
+		$\hat{b}_{med}$		& $0.997$			& $-0.002$			& $0.058$			& $0.058$
+	\end{tabular}
+\end{table}
+
+Como cada estimador es una variable aleatoria, para facilitar la notación definiremos $X = \hat{b}$ para cualquier estimador de $b$. Luego, el promedio de una muestra de tamaño $n$ de cualquier estimador de $b$ es $\bar{X}_{n}$, que a su vez equivale a:
+$$\bar{X}_{n} = \sum_{i=1}^{n}\frac{x_{i}}{n} = \sum_{i=1}^{n}\frac{\hat{b}_{i}}{n}$$
+
+El sesgo del estimador fue calculado utilizando:
+$$Sesgo(\bar{X}) = \bar{X} - 2 \text{ (siendo } 2 \text{ el valor real del parámetro } b \text{)}$$
+
+Mientras tanto, para calcular la variabilidad de cada estimador, se utilizó la expresión de la varianza muestral (que es insesgada) sobre las muestras de mil estimadores previamente calculados para cada método:
+\begin{align*}
+	V(X_{n}) &= \sum_{i=1}^{n}\frac{(x_{i}-\bar{X})^2}{n - 1} \implies \\
+	V(X_{1000}) &= \sum_{i=1}^{1000}\frac{(x_{i}-\bar{X})^2}{999}
+\end{align*}

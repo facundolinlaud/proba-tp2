@@ -1,5 +1,13 @@
-\section{Ejercicio 7}
-En este experimento observaremos el error cuadrático medio para cada estimador en función de $n$, con $n$ siendo la cantidad de muestras de tamaño $15$. En el gráfico siguiente, podemos observar que errores cuadráticos medios de cada estimador convergen a valores no nulos. En particular, observando los datos adquiridos en el \textbf{ejercicio 4}, podemos observar que el error cuadrático medio de $\hat{\theta}_{mv}$, $\hat{\theta}_{mom}$ y $\hat{\theta}_{med}$ tienden a $0.003$, $0.022$ y $0.057$ respectivamente, que no coincidentalmente aproximan al valor de sus varianzas con $n \rightarrow \infty$. ¿Esto significa que los estimadores son insesgados? Probablemente. Lo analizaremos adelante.
+La definición del error cuadrático medio es:
+\begin{displaymath}
+	ECM(\hat{\theta}) = V(\hat{\theta}) + Sesgo(\hat{\theta})^2
+\end{displaymath}
+
+Sabremos de antemano que el \textbf{E.C.M.} del estimador de momentos y el estimador de máxima verosimilitud no será cero porque sus sesgos no son nulos. Sin embargo, el \textbf{E.C.M.} del estimador de la doble mediana puede llegar a serlo si $V(\hat{b}_{med}) = 0$.
+
+\vskip 8pt
+
+A continuación presentamos los errores cuadráticos medios para cada estimador en función de $n$, con $n$ siendo la cantidad de muestras de tamaño $15$:
 
 \begin{figure}[H]
 	\centering
@@ -8,20 +16,8 @@ En este experimento observaremos el error cuadrático medio para cada estimador 
 	\label{fig:ej7-ecm-en-f-de-n}
 \end{figure}
 
-Observando el gráfico \ref{fig:ej7-ecm-en-f-de-n}, podemos sospechar que los errores cuadráticos medios de los tres estimadores tienden a la varianza cuando $n$ es muy grande. Podemos hipotetizar que los estimadores son consistentes, sobretodo porque en la figura \ref{fig:ej7-sesgos-en-f-de-n} se aprecia que el sesgo de los estimadores tiende a cero a medida que $n$ crece, es decir, los estimadores son – por lo menos – asintoticamente insesgados. Veamos los sesgos de los estimadores a medida que $n \rightarrow \infty$:
+Podemos observar un pequeño indicio de tendencia hacia cero por parte del \textbf{E.C.M.} del estimador $\hat{b}_{med}$ con $n \to \infty$. Mientras tanto, la figura \ref{fig:ej7-ecm-en-f-de-n} corrobora que los errores cuadráticos medios de los estimadores $\hat{b}_{mom}$ y $\hat{b}_{mv}$ no tienden a cero.
 
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=1\textwidth]{imagenes/sesgos-en-f-de-n.png}
-	\caption{\footnotesize Sesgos de los estimadores en función de n. $a=0, b=1$}
-	\label{fig:ej7-sesgos-en-f-de-n}
-\end{figure}
+\vskip 8pt
 
-Podemos conjeturar, entonces, que los sesgos de los estimadores $\hat{\theta}_{mom}$ y $\hat{\theta}_{med}$ tienden a cero. ¿Pero qué hay del estimador de máxima verosimilitud? Si calculamos $E(\hat{\theta}_{mv})$, llegaremos a que equivale a $\frac{n}{n+1} * \theta$, que si bien no es igual a $\theta$, sí tiende a este valor cuando $n \rightarrow \infty$. Luego el estimador de máxima verosimilitud es asintóticamente insesgado por lo tanto los errores cuadráticos medios de los estimadores efectivamente tienden a sus varianzas, y estas varianzas son muy cercanas a cero. Finalmente, como los estimadores son asintóticamente insesgados y sus varianzas se asimilan al valor nulo, se puede sospechar que son consistentes.
-
-% \begin{figure}[H]
-% 	\centering
-% 	\includegraphics[width=1\textwidth]{imagenes/varianzas-en-f-de-n-small.png}
-% 	\caption{\footnotesize Varianzas de los estimadores en función de n. $a=0, b=1$}
-% 	\label{fig:ej7-varianzas-en-f-de-n-small}
-% \end{figure}
+Ya demostramos, además, que la varianza del estimador $\hat{b}_{med}$ es cero por lo tanto es \textbf{consistente} porque su varianza tiende a cero y su esperanza al valor estimado $b$. Como los otros dos estimadores no son consistentes porque no son insesgados, nos quedamos con $\hat{b}_{med}$, cuya consistencia está asegurada.

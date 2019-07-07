@@ -1,21 +1,24 @@
-\section{Ejercicio 8}
-
+\section{Análisis de una muestra específica}
 Se nos pide calcular los Estimadores de la siguiente muestra
 
 \begin{center}
-0,917 0,247 0,384 0,530 0,798 0,912 0,096 0,684 0,394 20,1 0,769 0,137 0,352 0,332 0,670
+$0,917, 0,247, 0,384, 0,530, 0,798, 0,912, 0,096, 0,684, 0,394, 20,1, 0,769, 0,137, 0,352, 0,332, 0,670$
 \end{center}
 
-Mostramos a continuaci\'on, cuales son los valores obtenidos:
+Y estos son los estimadores de la muestra, asumiendo que proviene de una distribución uniforme de parámetros $a = 0$ y $b$:
 
 \begin{table}[h]
 	\centering
 	\begin{tabular}{lccc}
-		\textbf{Tipo de Estimador} & \textbf{Valor} \\
-		m\'axima versimilitud  &  $20,1$ \\
-		momentos & $3.64293$ \\
-		doble mediana & $1.06$
+		\textbf{Estimador} 	& \textbf{Valor} 	\\
+		$\hat{b}_{mv}$  	& $20,1$ 			\\
+		$\hat{b}_{mom}$		& $3.64293$ 		\\
+		$\hat{b}_{med}$		& $1.06$
 	\end{tabular}
 \end{table}
 
-Podemos observar la gran diferencia hay entre los estimadores. El estimador de m\'axima verosimilitud es el mayor de todos, mientras que, tanto el estimador de doble mediana como el estimador de momento son mucho mas chicos. Creemos que esto se debe al valor at\'ipico (20,1) que se encuentra en la muestra, ya que el estimador de m\'axima verosimilitud toma el m\'aximo de toda la muestra. Le sigue el estimador de momentos (con 3,64293). Este \'ultimo es un poco mas grande ya que nuestros ya que al ser el promedio de los valores, es suceptible a valores at\'ipicos. Finalmente, est\'a la doble mediana, en la que se toma la mediana de la muestra (0,530) y se lo multiplica por 2. 
+Podemos observar que en la muestra, todos los elementos están entre $0$ y $1$, con la excepción de uno que vale $20,1$. Debido a que $\hat{b}_{mv} = max\{x_1, \dots, x_n\}$, es decir, el estimador de máxima verosimilitud toma la forma del elemento más grande en la muestra, este estimador brindará el valor $20,1$ que será compatible con la forma de los datos. Sin embargo, $\hat{b}_{mom}$ toma en cuenta todos los valores de la muestra para determinar su valor, por lo tanto brinda cierta resistencia ante un valor grande y aislado como $20,1$, tomando un valor inferior a este. Lo mismo sucede con $\hat{b}_{med}$.
+
+\vskip 8pt
+
+El estimador más confiable para este caso es \textbf{el estimador de máxima verosimilitud}.
