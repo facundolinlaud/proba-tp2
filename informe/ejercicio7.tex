@@ -3,7 +3,7 @@ La definición del error cuadrático medio es:
 	ECM(\hat{\theta}) = V(\hat{\theta}) + Sesgo(\hat{\theta})^2
 \end{displaymath}
 
-Sabremos de antemano que el \textbf{E.C.M.} del estimador de momentos y el estimador de máxima verosimilitud no será cero porque sus sesgos no son nulos. Sin embargo, el \textbf{E.C.M.} del estimador de la doble mediana puede llegar a serlo si $V(\hat{b}_{med}) = 0$.
+Sabremos de antemano que el \textbf{E.C.M.} del estimador de momentos y el estimador de máxima verosimilitud no serán cero porque sus sesgos no son nulos. Sin embargo, el \textbf{E.C.M.} del estimador de la doble mediana puede llegar a serlo si $\lim_{n \to \infty} V(\hat{b}_{med}) = 0$.
 
 \vskip 8pt
 
@@ -16,8 +16,8 @@ A continuación presentamos los errores cuadráticos medios para cada estimador 
 	\label{fig:ej7-ecm-en-f-de-n}
 \end{figure}
 
-Podemos observar un pequeño indicio de tendencia hacia cero por parte del \textbf{E.C.M.} del estimador $\hat{b}_{med}$ con $n \to \infty$. Mientras tanto, la figura \ref{fig:ej7-ecm-en-f-de-n} corrobora que los errores cuadráticos medios de los estimadores $\hat{b}_{mom}$ y $\hat{b}_{mv}$ no tienden a cero.
+Podemos observar un indicio de tendencia hacia el valor nulo por parte del \textbf{E.C.M.} del estimador $\hat{b}_{med}$ con $n \to \infty$. Mientras tanto, la figura \ref{fig:ej7-ecm-en-f-de-n} corrobora que los errores cuadráticos medios de los estimadores $\hat{b}_{mom}$ y $\hat{b}_{mv}$ no tienden a cero.
 
 \vskip 8pt
 
-Ya demostramos, además, que la varianza del estimador $\hat{b}_{med}$ es cero por lo tanto es \textbf{consistente} porque su varianza tiende a cero y su esperanza al valor estimado $b$. Como los otros dos estimadores no son consistentes porque no son insesgados, nos quedamos con $\hat{b}_{med}$, cuya consistencia está asegurada.
+Sabiendo que $\hat{b}_{med}$ es el único estimador insesgado y en base a la evidencia provista que sugiere que su varianza tiende a cero, podemos sospechar que el estimador de la doble mediana es el único estimador \textbf{consistente}. Luego, provista una muestra de suficientes elementos, creemos que $\hat{b}_{med}$ es el estimador más confiable.

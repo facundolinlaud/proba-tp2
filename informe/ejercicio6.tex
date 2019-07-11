@@ -40,10 +40,10 @@ Podemos observar ahora que el porcentaje de diferencia entre $b$ y cada $\hat{b}
 
 \vskip 8pt
 
-Podemos observar que para el estimador $\hat{b}_{med}$, su diferencia porcentual con $b$ está entre el $-15\%$ y el $15\%$. La diferencia porcentual para el estimador $\hat{b}_{mom}$ está entre el $-10\%$ y el $10\%$ mientras que la diferencia porcentual para el estimador $\hat{b}_{mv}$ está entre el $-10\%$ y el $-5\%$. Esta cota está contenida en los números negativos debido a la naturaleza del estimador de máxima verosimilitud, que estima el valor de $b$ como el elemento de valor máximo dentro de la muestra analizada. Como la muestra en cuestión tiene distribución uniforme de parámetros $[0, b]$, un experimento uniforme jamás producirá un resultado mayor a $b$, por lo tanto el valor máximo de $\hat{b}_{mv}$ es $b$. Luego, el $sesgo(\hat{b}_{mv}) \leq 0$.
+También podemos ver que para el estimador $\hat{b}_{med}$, su diferencia porcentual con $b$ está entre el $-15\%$ y el $15\%$. La diferencia porcentual para el estimador $\hat{b}_{mom}$ está entre el $-10\%$ y el $10\%$ mientras que la diferencia porcentual para el estimador $\hat{b}_{mv}$ está entre el $-10\%$ y el $-5\%$. Esta cota está contenida en los números negativos debido a la naturaleza del estimador de máxima verosimilitud, que estima el valor de $b$ como el elemento de valor máximo dentro de la muestra analizada. Como la muestra en cuestión tiene distribución uniforme de parámetros $[0, b]$, un experimento uniforme jamás producirá un resultado mayor a $b$, por lo tanto el valor máximo de $\hat{b}_{mv}$ es $b$. Luego, el $sesgo(\hat{b}_{mv}) \leq 0$.
 
 \subsubsection{Estimador de Máxima Verosimilitud}
-Demostremos que el estimador $\hat{b}_{mv}$ es asintóticamente insesgado. Para ello debemos probar que $E(\hat{b}_{mv}) = b$.
+Veamos si el estimador $\hat{b}_{mv}$ es asintóticamente insesgado. Para que lo sea, debemos ver que $E(\hat{b}_{mv}) = b$.
 \begin{align*}
 	E(\hat{b}_{mv}) = b &\iff \\
 	E(max\{x_1, \dots, x_n\}) = b
@@ -65,7 +65,6 @@ Luego, podemos derivar la función acumulada y obtener la función de densidad d
 \begin{align*}
 	f_{Y}(y) = \frac{n}{b} \cdot \Big(\frac{y}{b}\Big)^{n - 1} I_{(0, b)}(y)
 \end{align*}
-
 Ahora podemos calcular la esperanza del estimador:
 \begin{align*}
 	E(\hat{b}_{mv}) = E(Y) 	&= \int_{0}^{b}y \cdot \frac{n}{b} \cdot \Big(\frac{y}{b}\Big)^{n - 1} \\
@@ -91,7 +90,7 @@ Averigüemos si el estimador de la doble mediana es insesgado o asintóticamente
 \begin{align*}
 	E(\hat{b}_{med}) &= E(2\tilde{X}) \\
 	 	 			 &= 2 \cdot E(\tilde{X}) \\
-	 	 			 &= 2 \cdot \Big(\frac{b - a}{2}\Big) \text{ (por indep.)}\\
+	 	 			 &= 2 \cdot \Big(\frac{b - a}{2}\Big) \text{ (por indep. y L.G.N.)}\\
 	 	 			 &= 2 \cdot \Big(\frac{b}{2}\Big) \\
 	 	 			 &= b
 \end{align*}
@@ -105,17 +104,17 @@ Por lo tanto, el estimador de la doble mediana es insesgado. Esto implica que ta
 	\label{fig:ej6-varianzas}
 \end{figure}
 
-La figura \ref{fig:ej6-varianzas} nos muestra el comportamiento de las varianzas. Podemos observar cómo la varianza del estimador de la doble mediana $\hat{b}_{med}$ tiene el crecimiento máximo de entre los tres, seguida por la varianza del estimador $\hat{b}_{mom}$ y en último lugar, la varianza del estimador $\hat{b}_{mv}$.
+La figura \ref{fig:ej6-varianzas} nos muestra el comportamiento de las varianzas. Podemos observar que la varianza del estimador de la doble mediana $\hat{b}_{med}$ tiene el mayor crecimiento al variar $b$, seguida por la varianza del estimador $\hat{b}_{mom}$ y en último lugar, la varianza del estimador $\hat{b}_{mv}$.
 
-\subsubsection{Varianza del Estimador de Doble Mediana}
-\begin{align*}
-	V(\hat{b}_{med}) &= E(\hat{b}^{2}_{med}) - \Big(E(\hat{b}_{med})\Big)^2 		\\
-					 &= E(2 \ \cdot \tilde{X}^2) - \Big(E(2 \ \cdot \tilde{X})\Big)^2 \\
-					 &= 4 \cdot \Bigg( E(\tilde{X}^2) - \Big(E(\tilde{X}^2)\Big)^2\Bigg)	\\
-	 	 			 &= 4 \cdot \Bigg( \Big(\frac{b}{2}\Big)^2 - \Big(\frac{b}{2}\Big)^2 \Bigg) \text{ (por indep.)}		\\
-	 	 			 &= 4 \cdot 0 = 0
-\end{align*}
-Luego, la varianza del estimador $\hat{b}_{med}$ es cero.
+% \subsubsection{Varianza del Estimador de Doble Mediana}
+% \begin{align*}
+% 	V(\hat{b}_{med}) &= E(\hat{b}^{2}_{med}) - \Big(E(\hat{b}_{med})\Big)^2 		\\
+% 					 &= E(2 \ \cdot \tilde{X}^2) - \Big(E(2 \ \cdot \tilde{X})\Big)^2 \\
+% 					 &= 4 \cdot \Bigg( E(\tilde{X}^2) - \Big(E(\tilde{X}^2)\Big)^2\Bigg)	\\
+% 	 	 			 &= 4 \cdot \Bigg( \Big(\frac{b}{2}\Big)^2 - \Big(\frac{b}{2}\Big)^2 \Bigg) \text{ (por indep.)}		\\
+% 	 	 			 &= 4 \cdot 0 = 0
+% \end{align*}
+% Luego, la varianza del estimador $\hat{b}_{med}$ es cero.
 
 \subsection{Error Cuadrático Medio}
 \begin{figure}[H]
@@ -125,4 +124,4 @@ Luego, la varianza del estimador $\hat{b}_{med}$ es cero.
 	\label{fig:ej6-ecm}
 \end{figure}
 
-La figura \ref{fig:ej6-ecm} exhibe la tendencia del \textbf{Error Cuadrático Medio} a aumentar cuando el valor de $b$ lo hace también. Si bien el estimador $\hat{b}_{med}$ parece tender al mayor error cuadrático medio, es el único estimador insesgado y por lo tanto la mejor opción de entre los tres.
+La figura \ref{fig:ej6-ecm} exhibe la tendencia del \textbf{Error Cuadrático Medio} a aumentar cuando el valor de $b$ lo hace también. Si bien el estimador $\hat{b}_{med}$ parece tender al mayor error cuadrático medio, es el único estimador insesgado y por lo tanto la mejor opción de entre los tres, dada una muestra de muchos elementos.
