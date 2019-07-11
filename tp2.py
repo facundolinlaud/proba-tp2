@@ -255,27 +255,27 @@ def ejercicio_7():
 	plot_x_axis()
 	plot_varianzas_estimadores(simulaciones_mv, simulaciones_mom, simulaciones_med)
 	show_plot(output="ecm-en-f-de-n-infinito.png",
-		save_instead_of_plotting = True)
+		save_instead_of_plotting = False)
 
-	# # Sesgos en función de n
-	# ns_sesgos_mv = como_lista("sesgo", simulaciones_mv)
-	# ns_sesgos_mom = como_lista("sesgo", simulaciones_mom)
-	# ns_sesgos_med = como_lista("sesgo", simulaciones_med)
+	# Sesgos en función de n
+	ns_sesgos_mv = como_lista("sesgo", simulaciones_mv)
+	ns_sesgos_mom = como_lista("sesgo", simulaciones_mom)
+	ns_sesgos_med = como_lista("sesgo", simulaciones_med)
 
-	# setup_plot("Sesgo", ns, [ns_sesgos_mv, ns_sesgos_mom, ns_sesgos_med],
-	# 	labels=leyendas, graficar_grande = False, xlabel="n", marker='.')
-	# plot_x_axis()
-	# show_plot(output="sesgos-en-f-de-n.png", save_instead_of_plotting = False)
+	setup_plot("Sesgo", ns, [ns_sesgos_mv, ns_sesgos_mom, ns_sesgos_med],
+		labels=leyendas, graficar_grande = False, xlabel="n", marker='.')
+	plot_x_axis()
+	show_plot(output="sesgos-en-f-de-n.png", save_instead_of_plotting = False)
 
-	# # Varianza en función de n
-	# ns_var_mv = como_lista("var_estimador", simulaciones_mv)
-	# ns_var_mom = como_lista("var_estimador", simulaciones_mom)
-	# ns_var_med = como_lista("var_estimador", simulaciones_med)
+	# Varianza en función de n
+	ns_var_mv = como_lista("var_estimador", simulaciones_mv)
+	ns_var_mom = como_lista("var_estimador", simulaciones_mom)
+	ns_var_med = como_lista("var_estimador", simulaciones_med)
 
-	# setup_plot("Varianza", ns, [ns_var_mv, ns_var_mom, ns_var_med],
-	# 	labels=leyendas, graficar_grande = False, xlabel="n", marker='.')
-	# plot_x_axis()
-	# show_plot(output="varianzas-en-f-de-n-small.png", save_instead_of_plotting = False)
+	setup_plot("Varianza", ns, [ns_var_mv, ns_var_mom, ns_var_med],
+		labels=leyendas, graficar_grande = False, xlabel="n", marker='.')
+	plot_x_axis()
+	show_plot(output="varianzas-en-f-de-n-small.png", save_instead_of_plotting = False)
 
 #################################################################################################
 ####################################### Ejercicio 8 #############################################
