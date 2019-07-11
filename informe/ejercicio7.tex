@@ -3,7 +3,7 @@ La definición del error cuadrático medio es:
 	ECM(\hat{\theta}) = V(\hat{\theta}) + Sesgo(\hat{\theta})^2
 \end{displaymath}
 
-Sabremos de antemano que el \textbf{E.C.M.} del estimador de momentos y el estimador de máxima verosimilitud no serán cero porque sus sesgos no son nulos. Sin embargo, el \textbf{E.C.M.} del estimador de la doble mediana puede llegar a serlo si $\lim_{n \to \infty} V(\hat{b}_{med}) = 0$.
+Sabremos de antemano que el \textbf{E.C.M.} del estimador de momentos no será cero porque sus sesgos no son nulos. Sin embargo, el \textbf{E.C.M.} de los estimadores de la doble mediana y de máxima verosimilitud pueden llegar a serlo si $\lim_{n \to \infty} V(\hat{b}) = 0$.
 
 \vskip 8pt
 
@@ -16,8 +16,18 @@ A continuación presentamos los errores cuadráticos medios para cada estimador 
 	\label{fig:ej7-ecm-en-f-de-n}
 \end{figure}
 
-Podemos observar un indicio de tendencia hacia el valor nulo por parte del \textbf{E.C.M.} del estimador $\hat{b}_{med}$ con $n \to \infty$. Mientras tanto, la figura \ref{fig:ej7-ecm-en-f-de-n} corrobora que los errores cuadráticos medios de los estimadores $\hat{b}_{mom}$ y $\hat{b}_{mv}$ no tienden a cero.
+La figura \ref{fig:ej7-ecm-en-f-de-n} corrobora que el error cuadrático medio del estimador $\hat{b}_{mom}$ no tiende a cero. Por otro lado, el \textbf{E.C.M.} del estimador de la doble media no aporta información concluyente, pues si bien no es nulo, parecería decrecer sutilmente al aumentar $n$. Finalmente, el estimador de máxima verosimilitud muestra  una fuerte tendencia al valor nulo. Por esta razón, tenemos evidencias para creer que su Error Cuadrático Medio tiende a cero a medida que se aumenta el valor de $n$. Veamos qué implicancias tiene:
 
 \vskip 8pt
 
-Sabiendo que $\hat{b}_{med}$ es el único estimador insesgado y en base a la evidencia provista que sugiere que su varianza tiende a cero, podemos sospechar que el estimador de la doble mediana es el único estimador \textbf{consistente}. Luego, provista una muestra de suficientes elementos, creemos que $\hat{b}_{med}$ es el estimador más confiable.
+\begin{align*}
+	\lim_{n \to \infty} ECM(\hat{b}_{mv}) &= \lim_{n \to \infty} V(\hat{b}_{mv}) + Sesgo(\hat{b}_{mv})^2 \\
+										  &= \lim_{n \to \infty} V(\hat{b}_{mv}) \text{ (porque asint. insesgado)} \\
+										  &= 0
+\end{align*}
+Por lo tanto, se tiene que:
+\begin{align*}
+	\lim_{n \to \infty} V(\hat{b}_{mv}) = 0
+\end{align*}
+
+Al tener varianza cero y ser asintóticamente insesgado, el estimador cumple todas las hipótesis de consistencia. Además, por presentar la menor varianza de los estimadores insesgados, el principio de estimación insesgada de mínima varianza nos asegura que $\hat{b}_{mv}$ es el estimador que provee la mejor calidad de los tres.

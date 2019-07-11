@@ -28,16 +28,12 @@ Para aproximar el sesgo, la varianza y el error cuadrático medio de cada estima
 	\end{tabular}
 \end{table}
 
-Si bien $\hat{b}_{med}$ es el único estimador consistente, ante la presencia de elementos contaminados, a menos que la contaminación se produzca en el o los elementos medianos (aquellos utilizados para calcular la mediana), no aportará un parámetro $b$ válido que sea compatible con la muestra en cuestión, pues es altamente probable que la muestra contenga al menos un elemento contaminado que resultará mayor al valor de $b$ estimado por el método de la doble mediana.
+Como ya discutimos en el punto anterior, el estimador de momentos y el estimador de la doble mediana diluirán la gravedad ejercida por los elementos contaminados (que en probabilidad son pocos) con los valores no contaminados (que serán la gran mayoría). Como con $\hat{b}_{med}$, si hay un elemento contaminado en la muestra, será altamente probable que se produzca una estimación de $b$ menor a alguno de los elementos contaminados y por ende resulte incompatible la estimación del parámetro con la muestra. Si esto no es un problema, y al contrario, se desea estimar $b$ con la menor influencia posible por parte de valores atípicos, el estimador de la doble mediana es la mejor opción al ser insesgado.
 
 \vskip 8pt
 
-Por otro lado, el estimador de momentos diluirá la gravedad ejercida por los elementos contaminados (que en probabilidad son pocos) con los valores no contaminados (que serán la gran mayoría). Por el mismo principio que en el estimador de la doble mediana, si hay un elemento contaminado en la muestra, será altamente probable que se produzca una estimación de $b$ menor a alguno de los elementos contaminados y por ende resulte incompatible la estimación del parámetro con la muestra.
-
-\vskip 8pt
-
-Sin embargo, el estimador de máxima verosimilitud se adaptará a cualquier aparición de elementos contaminados. Es decir, el parámetro estimado será siempre el más grande en la muestra, por lo tanto cualquiera estimación de $b$ será compatible con los elementos de la muestra. El problema es que, a diferencia de $\hat{b}_{med}$, este estimador no es consistente.
+Por otro lado, el estimador de máxima verosimilitud se adaptará a cualquier aparición de elementos contaminados. Es decir, el parámetro estimado será siempre el más grande en la muestra, por lo tanto cualquiera estimación de $b$ será compatible con los elementos de la muestra. Es decir, el estimador de máxima verosimilitud es altamente sensible a la aparición de elementos atípicos. Si este tipo de comportamiento es el buscado, este estimador es el indicado.
 
 \subsection{Conclusiones}
 
-Para este caso, con qué estimador quedarse depende de varias cosas. ¿Una muestra contaminada sigue siendo importante o debería ser deshechada? Si la respuesta es que es importante: ¿Qué tanto queremos arriesgarnos a producir un estimador incompatible con la muestra? y ¿Cuánto nos preocupa que nuestra estimación sea consistente? En nuestra opinión, un estimador siempre debería dar una estimación compatible con la muestra, por lo tanto y sin saber más sobre las aristas del problema, optamos por el estimador de máxima verosimilitud.
+Para este caso, con qué estimador quedarse depende de varias cosas. ¿Una muestra contaminada sigue siendo importante o debería ser deshechada? Si la respuesta es que es importante: ¿Qué tanto queremos arriesgarnos a producir un estimador incompatible con la muestra? y ¿Cuánto nos preocupa que nuestra estimación sea consistente? En nuestra opinión, un estimador debe representar con precisión el parámetro de una distribución de donde se extrae una muestra, por lo tanto concluimos que el mejor estimador ante la posibilidad de valores atípicos es el \textbf{estimador de la doble mediana}.

@@ -9,16 +9,14 @@ Planteemos el momento muestral de primer orden:
 Como $X_{1}, \dots, X_{n}$ es una muestra aleatoria de una distribución $U[0, b]$, podemos igualar el primer momento muestral a la esperanza de la distribución con parámetros $0$ y $b$:
 
 \begin{align*}
-	\frac{\sum_{i=1}^{n}X_{i}}{n} = E(X) &\implies \\
-	\frac{\sum_{i=1}^{n}X_{i}}{n} = \frac{b}{2} &\implies \\
-	\bar{X} = \frac{b}{2} &\implies \\
-	2 \cdot \bar{X} = b&
+	\frac{\sum_{i=1}^{n}X_{i}}{n} = \bar{X} &= E(X) \\
+	&= \frac{b}{2}
 \end{align*}
 
 De esta manera, obtenemos la expresión del estimador del parámetro $b$:
 
 \begin{align*}
-	\hat{b}_{mom} = 2 \bar{X}_{n}
+	\hat{b}_{mom} = 2 \bar{X}
 \end{align*}
 
 \subsection{Estimador de Máxima Verosimilitud}
@@ -28,8 +26,8 @@ Sabiendo que $a = 0$ y que $a < b$ por propiedades de distribución uniforme, pr
 
 \begin{align*}
 	L(b) &= \prod_{i=1}^{n}\frac{1}{b - a}I_{(a, b)}(x) \\
-	\iff L(b) &= \prod_{i=1}^{n}\frac{1}{b - 0}I_{(a, b)}(x) \\
-	\iff L(b) &= \prod_{i=1}^{n}\frac{1}{b}I_{(x_{i}, +\infty)}(b)
+		 &= \prod_{i=1}^{n}\frac{1}{b - 0}I_{(a, b)}(x) \\
+		 &= \prod_{i=1}^{n}\frac{1}{b}I_{(x_{i}, +\infty)}(b)
 \end{align*}
 
 Por lo tanto:

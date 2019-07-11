@@ -17,8 +17,8 @@ Y estos son los estimadores de la muestra, asumiendo que proviene de una distrib
 	\end{tabular}
 \end{table}
 
-Podemos observar que en la muestra, todos los elementos están entre $0$ y $1$, con la excepción de uno que vale $20,1$. Debido a que $\hat{b}_{mv} = max\{x_1, \dots, x_n\}$, es decir, el estimador de máxima verosimilitud toma la forma del elemento más grande en la muestra, este estimador brindará el valor $20,1$ que será compatible con la forma de los datos. Sin embargo, $\hat{b}_{mom}$ toma en cuenta todos los valores de la muestra para determinar su valor, por lo tanto brinda cierta resistencia ante un valor grande y aislado como $20,1$, tomando un valor inferior a este. Lo mismo sucede con $\hat{b}_{med}$.
+Podemos observar que en la muestra, todos los elementos están entre $0$ y $1$, con la excepción de uno que vale $20,1$. Debido a que $\hat{b}_{mv} = max\{x_1, \dots, x_n\}$, es decir, el estimador de máxima verosimilitud toma la forma del elemento más grande en la muestra, este estimador brindará el valor $20,1$. Esto significa que este estimador es \textbf{muy susceptible} a valores atípicos en la muestra. Por otro lado, $\hat{b}_{mom}$ toma en cuenta todos los valores de la muestra para determinar su valor, brindando cierta resistencia ante un valor grande y aislado como $20,1$. Pero este estimador no es insesgado. Finalmente, nos queda el estimador de la doble mediana, que es insesgado y – como el estimador de momentos – ofrece resistencia frente a la aparición de valores atípicos, que de existir, estarán en los extremos del esquema de tallo y hoja y sabemos que la mediana define sus valores a partir de los elementos del medio.
 
 \vskip 8pt
 
-El estimador más confiable para este caso es \textbf{el estimador de máxima verosimilitud}.
+El estimador más confiable para este caso es el de la \textbf{doble mediana}.
