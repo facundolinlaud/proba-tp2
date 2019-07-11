@@ -11,15 +11,12 @@ A continuación presentamos los errores cuadráticos medios para cada estimador 
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=1\textwidth]{imagenes/ecm-en-f-de-n.png}
+	\includegraphics[width=1\textwidth]{imagenes/ecm-en-f-de-n-infinito.png}
 	\caption{\footnotesize ECM de los estimadores en función de n. $a=0, b=1$}
 	\label{fig:ej7-ecm-en-f-de-n}
 \end{figure}
 
-La figura \ref{fig:ej7-ecm-en-f-de-n} corrobora que el error cuadrático medio del estimador $\hat{b}_{mom}$ no tiende a cero. Por otro lado, el \textbf{E.C.M.} del estimador de la doble media no aporta información concluyente, pues si bien no es nulo, parecería decrecer sutilmente al aumentar $n$. Finalmente, el estimador de máxima verosimilitud muestra  una fuerte tendencia al valor nulo. Por esta razón, tenemos evidencias para creer que su Error Cuadrático Medio tiende a cero a medida que se aumenta el valor de $n$. Veamos qué implicancias tiene:
-
-\vskip 8pt
-
+La figura \ref{fig:ej7-ecm-en-f-de-n} sugiere que el error cuadrático medio de los estimadores $\hat{b}_{mom}$ y $\hat{b}_{med}$ no tienden a cero. Sin embargo, el estimador de máxima verosimilitud muestra una significativa evidencia de tendencia al valor nulo. Por esta razón, tenemos razones para creer que su Error Cuadrático Medio tiende a cero a medida que se aumenta el valor de $n$. Veamos qué implicancias tiene:
 \begin{align*}
 	\lim_{n \to \infty} ECM(\hat{b}_{mv}) &= \lim_{n \to \infty} V(\hat{b}_{mv}) + Sesgo(\hat{b}_{mv})^2 \\
 										  &= \lim_{n \to \infty} V(\hat{b}_{mv}) \text{ (porque asint. insesgado)} \\

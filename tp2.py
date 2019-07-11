@@ -235,7 +235,9 @@ def plot_x_axis():
 	plt.axhline(0, color='black', linewidth=1)
 
 def ejercicio_7():
-	ns = [15, 30, 60, 120, 240, 480]#, 960, 1920, 2500, 3000, 3500, 4000]
+	ns = [15, 30, 60, 120, 240, 480, 960, 1920, 2500, 3000, 3500, 4000]
+
+	ns = [15 * i for i in range(1, 100)]
 
 	simulaciones_mv = [simulacion_mv(b = 1.0, n = n) for n in ns]
 	simulaciones_mom = [simulacion_mom(b = 1.0, n = n) for n in ns]
@@ -249,31 +251,31 @@ def ejercicio_7():
 	leyendas = ["Maxima Verosimilitud", "Momento", "Doble Mediana"]
 
 	setup_plot("ECM", ns, [ns_ecm_mv, ns_ecm_mom, ns_ecm_med], 
-		labels=leyendas, graficar_grande = False, xlabel="n", marker='.')
+		labels=leyendas, graficar_grande = True, xlabel="n", marker='')
 	plot_x_axis()
 	plot_varianzas_estimadores(simulaciones_mv, simulaciones_mom, simulaciones_med)
-	show_plot(output="ecm-en-f-de-n.png",
-		save_instead_of_plotting = False)
+	show_plot(output="ecm-en-f-de-n-infinito.png",
+		save_instead_of_plotting = True)
 
-	# Sesgos en función de n
-	ns_sesgos_mv = como_lista("sesgo", simulaciones_mv)
-	ns_sesgos_mom = como_lista("sesgo", simulaciones_mom)
-	ns_sesgos_med = como_lista("sesgo", simulaciones_med)
+	# # Sesgos en función de n
+	# ns_sesgos_mv = como_lista("sesgo", simulaciones_mv)
+	# ns_sesgos_mom = como_lista("sesgo", simulaciones_mom)
+	# ns_sesgos_med = como_lista("sesgo", simulaciones_med)
 
-	setup_plot("Sesgo", ns, [ns_sesgos_mv, ns_sesgos_mom, ns_sesgos_med],
-		labels=leyendas, graficar_grande = False, xlabel="n", marker='.')
-	plot_x_axis()
-	show_plot(output="sesgos-en-f-de-n.png", save_instead_of_plotting = False)
+	# setup_plot("Sesgo", ns, [ns_sesgos_mv, ns_sesgos_mom, ns_sesgos_med],
+	# 	labels=leyendas, graficar_grande = False, xlabel="n", marker='.')
+	# plot_x_axis()
+	# show_plot(output="sesgos-en-f-de-n.png", save_instead_of_plotting = False)
 
-	# Varianza en función de n
-	ns_var_mv = como_lista("var_estimador", simulaciones_mv)
-	ns_var_mom = como_lista("var_estimador", simulaciones_mom)
-	ns_var_med = como_lista("var_estimador", simulaciones_med)
+	# # Varianza en función de n
+	# ns_var_mv = como_lista("var_estimador", simulaciones_mv)
+	# ns_var_mom = como_lista("var_estimador", simulaciones_mom)
+	# ns_var_med = como_lista("var_estimador", simulaciones_med)
 
-	setup_plot("Varianza", ns, [ns_var_mv, ns_var_mom, ns_var_med],
-		labels=leyendas, graficar_grande = False, xlabel="n", marker='.')
-	plot_x_axis()
-	show_plot(output="varianzas-en-f-de-n-small.png", save_instead_of_plotting = False)
+	# setup_plot("Varianza", ns, [ns_var_mv, ns_var_mom, ns_var_med],
+	# 	labels=leyendas, graficar_grande = False, xlabel="n", marker='.')
+	# plot_x_axis()
+	# show_plot(output="varianzas-en-f-de-n-small.png", save_instead_of_plotting = False)
 
 #################################################################################################
 ####################################### Ejercicio 8 #############################################
@@ -374,11 +376,11 @@ def show_plot(output, save_instead_of_plotting):
 		plt.savefig(sys.path[0] + "/informe/imagenes/" + output, dpi=160, bbox_inches='tight')
 
 def ejecutar_ejercicios():
-	ejercicio_3()
-	ejercicio_4()
-	ejercicio_6()
+	# ejercicio_3()
+	# ejercicio_4()
+	# ejercicio_6()
 	ejercicio_7()
-	ejercicio_8()
-	ejercicio_9()
+	# ejercicio_8()
+	# ejercicio_9()
 
 ejecutar_ejercicios()
